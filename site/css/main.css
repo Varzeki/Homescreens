@@ -1,0 +1,77 @@
+@font-face { font-family: Avenir; src: url('../fonts/AvenirNextRoundedPro-Reg.otf'); }
+/* Move down content because we have a fixed navbar that is 50px tall */
+* {
+  font-family: Avenir;
+}
+
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+a {
+  color: #b10821;
+  transition: .2s;
+}
+
+a:hover{
+  color: #7b0517;
+}
+
+
+.c-cent {
+  float: center;
+  margin: 10%;
+}
+
+#imagecon {
+  width: 90%;
+  padding-left: 15%;
+}
+
+.navbar-inverse {
+  background-color: #b10821;
+  border: none;
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+  color: white;
+}
+
+.navbar-inverse .navbar-brand {
+  color: white;
+  transition: .2s;
+}
+
+.btn-primary {
+  background-color: #b10821;
+  border-color: #b10821;
+  transition: .2s;
+}
+
+.btn-primary:hover {
+  background-color: #7b0517;
+  border-color: #7b0517;
+}
+
+.btn-primary:focus {
+  background-color: #7b0517;
+}
+
+.btn-default {
+  transition: .2s;
+}
+
+.infographic{
+  width:100%;
+  height:100%;
+}
+
+.white-link {
+  color: white;
+}
+
+.white-link:hover {
+  color: white;
+}
+

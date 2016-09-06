@@ -1,12 +1,12 @@
-File.open("/home/homescreens/out.gen", "w") do |file|
+File.open("./out.gen", "w") do |file|
     iter = 0
-    Dir.foreach("/home/homescreens/site/images/thumb_sq") do |image|
+    Dir.foreach("./site/images/thumb_sq") do |image|
         next if image == '.' or image == '..'
         path = "./images/thumb_sq/".concat(image)
         puts "Path: ".concat(path)
         fullpath = "./images/full/".concat(image)
         puts "Full Path: ".concat(fullpath)
-        if File.file?('/home/homescreens/site/images/full/'.concat(image))
+        if File.file?('./site/images/full/'.concat(image))
             link = './images/full/'.concat(image)
         else
             tmp = "".concat(image)

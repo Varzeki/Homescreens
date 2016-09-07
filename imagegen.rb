@@ -1,29 +1,40 @@
-File.open("./out.gen", "w") do |file|
-    iter = 0
-    Dir.foreach("./site/images/thumb_sq") do |image|
-        next if image == '.' or image == '..'
-        path = "./images/thumb_sq/".concat(image)
-        puts "Path: ".concat(path)
-        fullpath = "./images/full/".concat(image)
-        puts "Full Path: ".concat(fullpath)
-        if File.file?('./site/images/full/'.concat(image))
-            link = './images/full/'.concat(image)
-        else
-            tmp = "".concat(image)
-            link = './images/webm/'.concat(tmp[0..4].concat('webm'))
-        end
-        puts "Link: ".concat(link)
-        if iter == 0
-            file.write("<div class='row'>\n")
-        end
-        file.write("<a href='#{link}'><img class='image' src='#{path}' /></a>\n")
-        iter = iter + 1
-        if iter == 4
-            file.write("</div>\n")
-            iter = 0
-        end
-    end
-    if not iter == 0
-        file.write("</div>\n")
-    end
+##
+# will create html for every image inside `data/NNNN`
+# and write to `screens.html`
+#
+# how to use this file:
+# $ ruby imagegen.rb
+##
+
+dirs = []
+html = ''
+
+Dir.foreach('site/data/') do |directory|
+	next if directory == '.' or directory == '..'
+
+	dirs.push(directory)
 end
+
+dirs = dirs.each_slice(4).to_a
+
+dirs.each do |dir|
+	html = html.concat('<div class="row">')
+
+	dir.each do |id|
+		image = Dir.glob('site/data/' + id + '/full.*')
+		if not image.count == 1
+			image = 'error!!11 image not found'
+		else
+			image = image[0].split('/').last
+		end
+
+		html = html.concat("\n")
+		html = html.concat('    <a href="data/' + id + '/' + image + '"><img class="image" src="data/' + id + '/thumb.png"></a>')
+	end
+
+	html = html.concat("\n</div>\n")
+end
+
+template = File.read('site/screens.tmpl')
+render = template.gsub(/\{contents\}/, html)
+File.open('site/screens.html', 'w') { |file| file.puts render }
